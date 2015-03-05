@@ -10,7 +10,7 @@ public class DBConnection {
 		Connection con = null;
 		String adress = "jdbc:postgresql://localhost:5432/cjweb1";
 		String userName = "postgres";
-		String password = "root";
+		String password = "admin";
 		try{
 			con = DriverManager.getConnection(adress, userName, password);
 			System.out.println("Connection successful.");
