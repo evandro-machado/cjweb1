@@ -47,6 +47,15 @@ public class CustomerDAO {
 		
 	}
 	
+	public void save(Customer customer){
+		if(customer.getId() != null && customer.getId() != 0){
+			update(customer);
+		}else{
+			create(customer);
+		}
+		
+	}
+	
 	public void delete(Customer customer){
 		String sql = "delete from customer where customerid=?";
 		try{

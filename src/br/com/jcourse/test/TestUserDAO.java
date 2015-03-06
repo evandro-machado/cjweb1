@@ -5,13 +5,13 @@ import java.util.List;
 import br.com.jcourse.entities.Customer;
 import br.com.jcourse.jdbc.CustomerDAO;
 
-public class TesteUserDAO {
+public class TestUserDAO {
 	public static void main(String[] args){
 		//testCreateCustomer();
 		//testUpdateCustomer();
 		//testDeleteCustomer();
-		//testReadAll();
-		testReadById();
+		testReadAll();
+		//testReadById();
 		//testReadByName();
 	}
 
