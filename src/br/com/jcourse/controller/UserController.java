@@ -35,17 +35,38 @@ public class UserController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("Calling for get method.");
 		
-		//1st - Geting the list
+		String action = request.getParameter("action");
+		
 		CustomerDAO customerDAO = new CustomerDAO();
-		List<Customer> list = customerDAO.readAll();
 		
-		//2nd - Setting request attribute
-		request.setAttribute("list", list);
+		if(action!=null && action.equals("rem")){
+
+			Customer customer = new Customer();
+			int id = Integer.parseInt(request.getParameter("id"));
+			customer.setId(id);
+			customerDAO.delete(customer);
+		}
+		if(action!=null && action.equals("alt")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			Customer customer = customerDAO.readById(id);
+			request.setAttribute("customer", customer);
+			RequestDispatcher output = request.getRequestDispatcher("formcustomer.jsp");
+			output.forward(request, response);
+		}
+			
 		
-		//Forwarding to JSP
-		RequestDispatcher out = request.getRequestDispatcher("customerlist.jsp");
-		out.forward(request, response);
-		
+		if(action!=null && action.equals("lis")){		
+			//1st - Geting the list
+	
+			List<Customer> list = customerDAO.readAll();
+			
+			//2nd - Setting request attribute
+			request.setAttribute("list", list);
+			
+			//Forwarding to JSP
+			RequestDispatcher out = request.getRequestDispatcher("customerlist.jsp");
+			out.forward(request, response);
+		}
 	}
 
 	/**
