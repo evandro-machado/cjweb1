@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,10 +34,18 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("Calling for get method.");
+		
+		//1st - Geting the list
 		CustomerDAO customerDAO = new CustomerDAO();
-		List<Customer> customerList = customerDAO.readAll();
-		PrintWriter output = response.getWriter();
-		output.println(customerList);
+		List<Customer> list = customerDAO.readAll();
+		
+		//2nd - Setting request attribute
+		request.setAttribute("list", list);
+		
+		//Forwarding to JSP
+		RequestDispatcher out = request.getRequestDispatcher("customerlist.jsp");
+		out.forward(request, response);
+		
 	}
 
 	/**
