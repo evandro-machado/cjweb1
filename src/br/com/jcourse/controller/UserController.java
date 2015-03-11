@@ -65,7 +65,7 @@ public class UserController extends HttpServlet {
 			request.setAttribute("list", list);
 			
 			//Forwarding to JSP
-			RequestDispatcher out = request.getRequestDispatcher("customerlists.jsp");
+			RequestDispatcher out = request.getRequestDispatcher("customerlist.jsp");
 			out.forward(request, response);
 		}
 		

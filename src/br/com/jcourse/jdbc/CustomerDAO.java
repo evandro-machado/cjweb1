@@ -143,4 +143,27 @@ public class CustomerDAO {
 		return customerList;
 	}
 	
+	public Customer authenticate(Customer customer){
+		String sql = "select * from customer where customerlogin = ? and customerpassword = ?";
+		
+		Customer customerReturn = null;
+		try{
+			PreparedStatement prp = con.prepareStatement(sql);
+			prp.setString(1, customer.getLogin());
+			prp.setString(2, customer.getPassword());
+			ResultSet result = prp.executeQuery();
+			
+			if(result.next()){
+				customerReturn = new Customer();
+				customerReturn.setId(result.getInt("customerid"));
+				customerReturn.setName(result.getString("customername"));
+				customerReturn.setLogin(result.getString("customerlogin"));
+				customerReturn.setPassword(result.getString("customerpassword"));
+			}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return customerReturn;
+	}
+	
 }
