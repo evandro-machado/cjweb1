@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -41,13 +42,23 @@ public class FilterAutenthicate implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//Is logged in?
-		HttpSession session = (HttpServletRequest) request.getSession();
+		//Casting HttpServletRequest
+		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		
-		if(){
+		String url =httpServletRequest.getRequestURI();
+		
+		
+		//Is logged in?
+		HttpSession session = httpServletRequest.getSession();
+		
+		if(session.getAttribute("custLogged") != null 
+				|| url.lastIndexOf("login.html")>-1 
+				|| url.lastIndexOf("authcontroller.do")>-1){
+			
 			chain.doFilter(request, response);//Let request flow			
 		}else{
 			//redirect to Log in page
+			((HttpServletResponse) response).sendRedirect("login.html");
 			
 		}
 	}

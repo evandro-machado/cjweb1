@@ -8,8 +8,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Listing with JSTL</title>
+<script type="text/javascript">
+function confirmExclusion(id){
+	if(window.confirm("Confirm exclusion?")){
+		location.href="usercontroller.do?action=rem&id="+id;
+	}
+}
+</script>
 </head>
 <body>
+	<c:import url="includes/menu.jsp"></c:import>
 	<table border="1">
 		<tr bgcolor="EAEAEA">
 			<th>ID</th><th>Name</th><th>Login</th><th>Password</th><th>Ação</th>
@@ -22,7 +30,7 @@
 			<td>${customer.login }</td>
 			<td>${customer.password }</td>
 			<td>
-				<a href="usercontroller.do?action=rem&id=${customer.id }"> Delete </a>
+				<a href="javascript:confirmExclusion(${customer.id })"> Delete </a>
 				<a href="usercontroller.do?action=alt&id=${customer.id }">Alter</a>
 			</td>
 		</tr>

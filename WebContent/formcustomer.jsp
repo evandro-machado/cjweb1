@@ -10,7 +10,7 @@
 <title>Sign Up Using JSTL</title>
 </head>
 <body>
-
+<c:import url="includes/menu.jsp"></c:import>
 
 <form action="usercontroller.do?action=lis" method="post" >
 			<label>ID: </label>

@@ -32,6 +32,13 @@ public class AuthenticatorController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			session.invalidate();	
+		}
+		
+		response.sendRedirect("login.html");
+		
 	}
 
 	/**
@@ -51,7 +58,7 @@ public class AuthenticatorController extends HttpServlet {
 		if(customerReturn != null){
 			//Creating Session
 			HttpSession session = request.getSession();
-			session.setAttribute("custlogged", customerReturn);
+			session.setAttribute("custLogged", customerReturn);
 			
 			
 			request.getRequestDispatcher("index.jsp").forward(request, response);

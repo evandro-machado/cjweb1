@@ -8,6 +8,7 @@
 <title>Welcome New Session</title>
 </head>
 <body>
-	Welcome <c:out value="${requestScope.custlogged.name }" />. Your session has started!
+	Welcome ${sessionScope.custLogged.name }. Your session has started!
+	<img src="images/logo_info.jpg"/>
 </body>
 </html>
