@@ -1,11 +1,15 @@
 package br.com.jcourse.jdbc;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import br.com.jcourse.entities.Customer;
 
@@ -47,9 +51,10 @@ public class CustomerDAO {
 		
 	}
 	
-	public void save(Customer customer){
+	public void save(Customer customer) throws IOException{
 		if(customer.getId() != null && customer.getId() != 0){
 			update(customer);
+
 		}else{
 			create(customer);
 		}

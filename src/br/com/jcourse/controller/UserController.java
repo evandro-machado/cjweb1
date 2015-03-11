@@ -45,6 +45,7 @@ public class UserController extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("id"));
 			customer.setId(id);
 			customerDAO.delete(customer);
+			response.sendRedirect("usercontroller.do?action=lis");
 		}
 		if(action!=null && action.equals("alt")){
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -64,8 +65,20 @@ public class UserController extends HttpServlet {
 			request.setAttribute("list", list);
 			
 			//Forwarding to JSP
-			RequestDispatcher out = request.getRequestDispatcher("customerlist.jsp");
+			RequestDispatcher out = request.getRequestDispatcher("customerlists.jsp");
 			out.forward(request, response);
+		}
+		
+		if(action!=null && action.equals("sgn")){
+			Customer customer = new Customer();
+			customer.setId(0);
+			customer.setName("");
+			customer.setLogin("");
+			customer.setPassword("");
+			
+			request.setAttribute("customer", customer);
+			RequestDispatcher out = request.getRequestDispatcher("formcustomer.jsp");
+			out.forward(request,response);
 		}
 	}
 
@@ -94,8 +107,6 @@ public class UserController extends HttpServlet {
 		CustomerDAO customerDAO = new CustomerDAO();
 		customerDAO.save(customer);
 		
-		PrintWriter output = response.getWriter();
-		output.println("Customer registered!");
 	}
 
 }
